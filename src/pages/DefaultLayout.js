@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
-import './DefaultLayout.css'
+import './styles/DefaultLayout.css'
 
 const DefaultLayout = ({children}) => {
   return (
