@@ -1,11 +1,15 @@
 import React from 'react'
 import Entry from './pages/Entry'
+import DefaultLayout from './pages/DefaultLayout'
 
 
 const App = () => {
   return (
     <div>
-      <Entry/>
+      {/* <Entry/> */}
+      <DefaultLayout>
+        //Dashboard
+      </DefaultLayout>
     </div>
   )
 }
