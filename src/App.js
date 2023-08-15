@@ -2,6 +2,7 @@ import React from 'react'
 import Entry from './pages/Entry'
 import DefaultLayout from './pages/DefaultLayout'
 import {DashBoard} from './pages/DashBoard'
+import { AddTicket } from './pages/AddTicket'
 
 
 const App = () => {
@@ -9,7 +10,8 @@ const App = () => {
     <div>
       {/* <Entry/> */}
       <DefaultLayout>
-        <DashBoard/>
+        {/* <DashBoard/> */}
+        <AddTicket/>
       </DefaultLayout>
     </div>
   )
