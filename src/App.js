@@ -4,6 +4,7 @@ import DefaultLayout from './pages/DefaultLayout'
 import {DashBoard} from './pages/DashBoard'
 import { AddTicket } from './pages/AddTicket'
 import { TicketList } from './pages/TicketList'
+import { SingleTicketView } from './pages/SingleTicketView'
 
 
 const App = () => {
@@ -13,7 +14,8 @@ const App = () => {
       <DefaultLayout>
         {/* <DashBoard/> */}
         {/* <AddTicket/> */}
-        <TicketList/>
+        {/* <TicketList/> */}
+        <SingleTicketView/>
       </DefaultLayout>
     </div>
   )
