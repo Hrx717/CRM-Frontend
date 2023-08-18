@@ -1,5 +1,6 @@
 import React from 'react'
 import {Table} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
 export const TicketTable = () => {
   return (
@@ -15,7 +16,8 @@ export const TicketTable = () => {
         <tbody>
             <tr>
                 <td>1</td>
-                <td>ssl issue</td>
+                {/* after having tickets id change path using template literals */}
+                <td><Link to='/ticket/1'>ssl issue</Link></td>
                 <td>not resolve</td>
                 <td>2023:08:15</td>
             </tr>

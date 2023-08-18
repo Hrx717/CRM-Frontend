@@ -4,7 +4,7 @@ import {Container,Form, Button} from 'react-bootstrap'
 export const AddTicketForm = ({handleOnChange, handleOnSubmit, formData}) => {
     // console.log(formData)
   return (
-    <Container style={styles.FromBox}>
+    <Container style={styles.FormBox}>
         <h2 className='text-center pt-3'>ADD NEW TICKET</h2>
         <hr/>
         <Form autoComplete='off' onSubmit={handleOnSubmit}>
@@ -54,7 +54,7 @@ export const AddTicketForm = ({handleOnChange, handleOnSubmit, formData}) => {
 
 
 const styles = {
-    FromBox : {
+    FormBox : {
         borderRadius: "8px",
         boxShadow: "0 0 15px -5px black",
         width: "60%",

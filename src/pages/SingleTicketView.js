@@ -3,8 +3,11 @@ import {Container,Row,Col, Button} from 'react-bootstrap'
 import { NestedLinks } from '../components/NestedLinks'
 import { MessageHistory } from '../components/MessageHistory'
 import { UpdateTicket } from '../components/UpdateTicket'
+import {useParams} from 'react-router-dom'
 
 export const SingleTicketView = () => {
+    const {id} = useParams();
+    console.log(id);
     const [ticketReply,setTicketReply] = useState('');
 
     const handleTicketReply = (e) => {
