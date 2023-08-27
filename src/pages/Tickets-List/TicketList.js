@@ -1,19 +1,17 @@
-import React, { useState } from 'react'
-import { NestedLinks } from '../components/NestedLinks'
+import React, { useEffect } from 'react'
+import { NestedLinks } from '../../components/NestedLinks'
 import {Container,Row,Col, Button} from 'react-bootstrap'
-import { SearchForm } from '../components/SearchForm'
-import { TicketTable } from '../components/TicketTable'
+import { SearchForm } from '../../components/SearchForm'
+import { TicketTable } from '../../components/TicketTable'
 import {Link} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import {fetchAllTickets} from './TicketAction'
 
 export const TicketList = () => {
-    const [str,setStr] = useState('');
-    const handleOnChange = (e) => {
-        setStr(e.target.value);
-    }
-
-    // const searchTicket = (sttr) => {
-
-    // }
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchAllTickets());
+    }, [dispatch]);
 
     return (
     <Container>
@@ -29,8 +27,7 @@ export const TicketList = () => {
             </Link>
             </Col>
             <Col className='text-end'>
-                <SearchForm handleOnChange={handleOnChange}
-                str={str}/>
+                <SearchForm/>
             </Col>
         </Row>
         <hr/>

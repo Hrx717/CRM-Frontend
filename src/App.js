@@ -7,7 +7,7 @@ import {
 import Entry from './pages/Entry'
 import {DashBoard} from './pages/DashBoard'
 import { AddTicket } from './pages/AddTicket'
-import { TicketList } from './pages/TicketList'
+import { TicketList } from './pages/Tickets-List/TicketList'
 import { SingleTicketView } from './pages/SingleTicketView'
 import {PrivateRoute} from './components/PrivateRoute'
 
@@ -20,10 +20,11 @@ const App = () => {
             <Route exact path='/' element={<Entry/>} />
         </Routes>
         <Routes>
-            <Route path='/dashboard' element={<PrivateRoute children={<DashBoard/>}/>} />
-            <Route path='/add-ticket' element={<PrivateRoute children={<AddTicket/>}/>} />
-            <Route path='/tickets' element={<PrivateRoute children={<TicketList/>}/>}/>
-            <Route path='/ticket/:id' element={<PrivateRoute children={<SingleTicketView/>}/>} />
+            <Route exact path='/dashboard' element={<PrivateRoute children={<DashBoard/>}/>} />
+            <Route exact path='/add-ticket' element={<PrivateRoute children={<AddTicket/>}/>} />
+            <Route exact path='/tickets' element={<PrivateRoute children={<TicketList/>}/>}/>
+            <Route exact path='/ticket/:id' element={<PrivateRoute children={<SingleTicketView/>}/>} />
+            <Route exact path="*" element={<p>Path not resolved</p>} />
         </Routes>
       </Router>
     </div>
