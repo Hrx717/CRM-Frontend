@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Container,Row,Col, Button} from 'react-bootstrap'
 import { NestedLinks } from '../components/NestedLinks'
-import { MessageHistory } from '../components/MessageHistory'
+import { MessageHistory } from '../components/MessageReplies/MessageHistory'
 import { UpdateTicket } from '../components/UpdateTicket'
 import {useParams} from 'react-router-dom'
 

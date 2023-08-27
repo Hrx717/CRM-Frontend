@@ -18,6 +18,7 @@ const TicketListSlice = createSlice({
             state.tickets = action.payload;
             state.searchTicketList = action.payload;
             state.isLoading = false;
+            state.error = '';
         },
         fetchTicketFail: (state,action) => {
             state.error = action.payload;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import logo from "../assests/logo3.png";
+import logo from "../../assests/logo3.png";
 import { useNavigate } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 
