@@ -3,11 +3,15 @@ import { Navbar, Nav } from "react-bootstrap";
 import logo from "../../assests/logo3.png";
 import { useNavigate } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
+import { userLogout } from "../../api/userApi";
 
 export const Header = () => {
   const navigate = useNavigate();
 
-  const logMeOut = () => {
+  const logMeOut = async() => {
+    await userLogout();
+    sessionStorage.removeItem('accessJWT');
+    localStorage.removeItem('crmSite');
     navigate("/");
   };
 

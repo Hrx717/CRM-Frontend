@@ -1,8 +1,8 @@
 import React from 'react'
 import {Container, Row, Col, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import { TicketTable } from '../components/TicketTable'
-import { NestedLinks } from '../components/NestedLinks'
+import { TicketTable } from '../../components/TicketTable'
+import { NestedLinks } from '../../components/NestedLinks'
 
 export const DashBoard = () => {
   return (

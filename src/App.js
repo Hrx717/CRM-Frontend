@@ -5,7 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import Entry from './pages/Layout/Entry'
-import {DashBoard} from './pages/DashBoard'
+import {DashBoard} from './pages/Dashboard/DashBoard'
 import { AddTicket } from './pages/AddTicket'
 import { TicketList } from './pages/Tickets-List/TicketList'
 import { SingleTicketView } from './pages/SingleTicketView'

@@ -1,15 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Container, Row, Col, Form, Button, Spinner, Alert} from 'react-bootstrap';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import { loginPending, loginSuccess, loginFail } from './LoginSlice';
 import {userLogin} from '../../api/userApi';
+import {getUserProfile} from '../../pages/Dashboard/userAction'
 
 const Login = ({formSwitcher}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {isLoading,isAuth, error} = useSelector((state) => state.login);
+  useEffect(() => {
+    (sessionStorage.getItem('accessJWT')) && navigate('/dashboard');
+  },[navigate, isAuth]);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -35,6 +40,7 @@ const Login = ({formSwitcher}) => {
 
       if(loginUser.status==='success') {
         dispatch(loginSuccess(loginUser));
+        dispatch(getUserProfile());
         navigate("/dashboard");
       }else {
         dispatch(loginFail(loginUser.message));
