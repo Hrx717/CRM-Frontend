@@ -6,9 +6,9 @@ import {
 } from "react-router-dom";
 import Entry from './pages/Layout/Entry'
 import {DashBoard} from './pages/Dashboard/DashBoard'
-import { AddTicket } from './pages/AddTicket'
+import { AddTicket } from './pages/Add-ViewTicket/AddTicket'
 import { TicketList } from './pages/Tickets-List/TicketList'
-import { SingleTicketView } from './pages/SingleTicketView'
+import { SingleTicketView } from './pages/Add-ViewTicket/SingleTicketView'
 import {PrivateRoute} from './components/PrivateRoute'
 
 
@@ -18,13 +18,10 @@ const App = () => {
       <Router>
         <Routes>
             <Route exact path='/' element={<Entry/>} />
-        </Routes>
-
-        <Routes>
             <Route exact path='/dashboard' element={<PrivateRoute children={<DashBoard/>}/>} />
             <Route exact path='/add-ticket' element={<PrivateRoute children={<AddTicket/>}/>} />
             <Route exact path='/tickets' element={<PrivateRoute children={<TicketList/>}/>}/>
-            <Route exact path='/ticket/:id' element={<PrivateRoute children={<SingleTicketView/>}/>} />
+            <Route exact path='/ticket/:tId' element={<PrivateRoute children={<SingleTicketView/>}/>} />
         </Routes>
       </Router>
     </div>

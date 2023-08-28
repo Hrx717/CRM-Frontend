@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {Container, Row, Col} from 'react-bootstrap'
-import { NestedLinks } from '../components/NestedLinks'
-import { AddTicketForm } from '../components/AddTicketForm'
+import { NestedLinks } from '../../components/NestedLinks'
+import { AddTicketForm } from '../../components/AddTicketForm'
 
 const intialForm = {
   subject: '',

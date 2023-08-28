@@ -1,17 +1,58 @@
-import axios from 'axios'
+import axios from 'axios';
 
-export const getAllTickets = async() => {
+const rootUrl = 'http://localhost:3001/v1/';
+const allticketsUrl = rootUrl + 'ticket';
+const singleTicketUrl = rootUrl + 'ticket/';
+export const getAllTickets = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            const result = axios.get(
-                'http://localhost:3001/v1/ticket', {
-                    'headers':{
-                        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIyQGVtYWlsLmNvbSIsImlhdCI6MTY5MzEyNjI1NiwiZXhwIjoxNjkzMjEyNjU2fQ.YaWOrNUiDzkiFgFacb0Fe2mxlYyOis6YWaRyb-My0xc",
+            const result = await axios.get(
+                allticketsUrl, {
+                    headers:{
+                        Authorization: sessionStorage.getItem('accessJWT'),
                     }
                 });
             resolve(result);
         }
         catch (error) {
+            console.log(error);
+            reject(error);
+        }
+    });
+}
+
+export const getSingleTicket = (tId, msgObj) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const result = await axios.get(
+                singleTicketUrl + tId, {
+                    headers:{
+                        Authorization: sessionStorage.getItem('accessJWT'),
+                    }
+                });
+            resolve(result);
+        }
+        catch (error) {
+            console.log(error);
+            reject(error);
+        }
+    });
+}
+
+export const updateReplyTicket = (tId, msgObj) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const result = await axios.put(
+                singleTicketUrl + tId, msgObj, {
+                    headers:{
+                        Authorization: sessionStorage.getItem('accessJWT'),
+                    }
+            });
+            console.log(result)
+            resolve(result);
+        }
+        catch (error) {
+            console.log(error);
             reject(error);
         }
     });

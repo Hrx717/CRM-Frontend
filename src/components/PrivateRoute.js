@@ -4,11 +4,13 @@ import DefaultLayout from '../pages/Layout/DefaultLayout';
 import {useSelector, useDispatch} from 'react-redux';
 import {loginSuccess} from './LoginAndForget/LoginSlice';
 import { fetchNewAccessJWT } from '../api/userApi';
+import {getUserProfile} from '../pages/Dashboard/userAction'
 
 
 const PrivateRoute = ({children}) => {
   const dispatch = useDispatch();
   const {isAuth} = useSelector((state) => state.login);
+  const {user} = useSelector((state) => state.user);
   useEffect(() => {
     const updateAcessJWT = async () => {
       const result = await fetchNewAccessJWT();
@@ -17,11 +19,18 @@ const PrivateRoute = ({children}) => {
       }
     }
 
-    updateAcessJWT();
-    if(sessionStorage.getItem('accessJWT')) {
+    if(!user._id) {
+      dispatch(getUserProfile());
+    }
+
+    if(!sessionStorage.getItem('accessJWT') && localStorage.getItem('crmSite')) {
+      updateAcessJWT();
+    }
+    
+    if(!isAuth && sessionStorage.getItem('accessJWT')) {
       dispatch(loginSuccess());
     }
-  },[dispatch]);
+  },[dispatch, isAuth, user._id]);
 
   return (
     isAuth ? <DefaultLayout>{children}</DefaultLayout> : <Navigate to="/" />

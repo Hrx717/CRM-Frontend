@@ -5,12 +5,15 @@ let initialState = {
     isLoading:false,
     error:'',
     searchTicketList:[],
+    selectedTicket: {},
+    replyMsg: '',
 }
 
 const TicketListSlice = createSlice({
     name: 'tickets',
     initialState,
     reducers:{
+        //all tickets
         fetchTicketLoading: (state) => {
             state.isLoading = true;
         },
@@ -24,7 +27,7 @@ const TicketListSlice = createSlice({
             state.error = action.payload;
             state.isLoading = false;
         },
-
+        //filter ticket
         searchTickets: (state, {payload}) => {
             state.searchTicketList = state.tickets.filter((row) => {
                 if(!payload) return row;
@@ -32,13 +35,48 @@ const TicketListSlice = createSlice({
                 const searchStr = payload.toLowerCase();
                 return row.subject.toLowerCase().includes(searchStr);
             });
-        }
+        },
+        // single ticket
+        fetchSingleTicketLoading: (state) => {
+            state.isLoading = true;
+        },
+        fetchSingleTicketSuccess: (state,action) => {
+            state.isLoading = false;
+            state.selectedTicket = action.payload;
+            state.error = '';
+        },
+        fetchSingleTicketFail: (state,action) => {
+            state.error = action.payload;
+            state.isLoading = false;
+        },
+        //ticket reply
+        replyTicketLoading: (state) => {
+            state.isLoading = true;
+        },
+        replyTicketSuccess: (state, {payload}) => {
+            state.isLoading = false;
+            state.error = '';
+            state.replyMsg = payload;
+        },
+        replyTicketFail: (state,action) => {
+            state.error = action.payload;
+            state.isLoading = false;
+        },
     }
 });
 
 const {reducer, actions} = TicketListSlice;
-export const {fetchTicketLoading, 
-    fetchTicketSuccess, fetchTicketFail,
-    searchTickets} = actions;
+export const {
+    fetchTicketLoading, 
+    fetchTicketSuccess, 
+    fetchTicketFail,
+    searchTickets,
+    fetchSingleTicketLoading, 
+    fetchSingleTicketSuccess, 
+    fetchSingleTicketFail,
+    replyTicketLoading,
+    replyTicketSuccess,
+    replyTicketFail,
+} = actions;
 
 export default reducer;

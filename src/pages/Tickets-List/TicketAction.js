@@ -1,6 +1,10 @@
 import {fetchTicketLoading, fetchTicketSuccess, fetchTicketFail,
-    searchTickets} from './TicketListSlice';
-import { getAllTickets } from '../../api/ticketApi';
+    searchTickets,fetchSingleTicketLoading, 
+    fetchSingleTicketSuccess, 
+    fetchSingleTicketFail,replyTicketLoading,
+    replyTicketSuccess,
+    replyTicketFail,} from './TicketListSlice';
+import { getAllTickets, getSingleTicket, updateReplyTicket } from '../../api/ticketApi';
 
 export const fetchAllTickets = () => async (dispatch) => {
     //1. Start Loading
@@ -8,7 +12,7 @@ export const fetchAllTickets = () => async (dispatch) => {
     //2. Fetch data
     try {
         const result = await getAllTickets();
-        console.log(result);
+        // console.log(result);
         if(result.data.status==='success')
         dispatch(fetchTicketSuccess(result.data.result));
         else
@@ -20,6 +24,39 @@ export const fetchAllTickets = () => async (dispatch) => {
     }
 }
 
+//filter ticket
 export const filterSearchTicket = (str) => (dispatch) => {
     dispatch(searchTickets(str));
+}
+
+//fetch single ticket
+export const fetchSingleTicket = (tId) => async (dispatch) => {
+    dispatch(fetchSingleTicketLoading());
+    try {
+        const result = await getSingleTicket(tId);
+
+        if(result.data.status==='success')
+        dispatch(fetchSingleTicketSuccess(result.data.result));
+        else
+        dispatch(fetchSingleTicketFail(result.data.message));
+    }
+    catch(error) {
+        dispatch(fetchSingleTicketFail(error.message));
+    }
+}
+
+//reply on ticket
+export const replyOnTicket = (tId, msgObj) => async (dispatch) => {
+    dispatch(replyTicketLoading());
+    try {
+        const result = await updateReplyTicket(tId, msgObj);
+        if(result.data.status==='success')
+        dispatch(replyTicketSuccess(result.data.message));
+        else
+        dispatch(replyTicketFail(result.data.message))
+    }
+    catch(error) {
+        console.log(error);
+        dispatch(replyTicketFail(error.message));
+    }
 }

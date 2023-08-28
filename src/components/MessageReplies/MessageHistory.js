@@ -1,14 +1,17 @@
-import React from 'react'
-import './styles/MessageHistory.css'
+import React from 'react';
+import './styles/MessageHistory.css';
 
 export const MessageHistory = ({msg}) => {
+  if(!msg) return null;
   return (
-    <div className='message-history mt-4'>
+    msg.map((row, i) => (
+      <div key={i} className='message-history mt-4'>
         <div className='send fw-semibold text-secondary'>
-        <div className='sender'>Rahul</div>
-        <div className='date'>05:08:2023</div>
+        <div className='sender'>{row.sender}</div>
+        <div className='date'>{new Date(row.msgAt).toLocaleString()}</div>
         </div>
-        <div className='message'>Fix! This issue</div>
-    </div>
+        <div className='message'>{row.message}</div>
+      </div>
+    ))
   )
 }
