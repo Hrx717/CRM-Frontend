@@ -19,16 +19,16 @@ const PrivateRoute = ({children}) => {
       }
     }
 
-    if(!user._id) {
-      dispatch(getUserProfile());
-    }
-
     if(!sessionStorage.getItem('accessJWT') && localStorage.getItem('crmSite')) {
       updateAcessJWT();
     }
     
     if(!isAuth && sessionStorage.getItem('accessJWT')) {
       dispatch(loginSuccess());
+    }
+
+    if(!user._id) {
+      dispatch(getUserProfile());
     }
   },[dispatch, isAuth, user._id]);
 

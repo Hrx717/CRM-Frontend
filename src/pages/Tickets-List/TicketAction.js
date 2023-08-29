@@ -3,8 +3,12 @@ import {fetchTicketLoading, fetchTicketSuccess, fetchTicketFail,
     fetchSingleTicketSuccess, 
     fetchSingleTicketFail,replyTicketLoading,
     replyTicketSuccess,
-    replyTicketFail,} from './TicketListSlice';
-import { getAllTickets, getSingleTicket, updateReplyTicket } from '../../api/ticketApi';
+    replyTicketFail,
+    closeTicketLoading,
+    closeTicketSuccess,
+    closeTicketFail,} from './TicketListSlice';
+import { getAllTickets, getSingleTicket, updateReplyTicket,
+    updateTicketStatusClosed } from '../../api/ticketApi';
 
 export const fetchAllTickets = () => async (dispatch) => {
     //1. Start Loading
@@ -58,5 +62,23 @@ export const replyOnTicket = (tId, msgObj) => async (dispatch) => {
     catch(error) {
         console.log(error);
         dispatch(replyTicketFail(error.message));
+    }
+}
+
+//close ticket
+export const closeTicket = (tId) => async (dispatch) =>{
+    dispatch(closeTicketLoading());
+    try {
+        const result = await updateTicketStatusClosed(tId);
+        if(result.data.status==='success') {
+            dispatch(closeTicketSuccess(result.data.message));
+            dispatch(fetchSingleTicket(tId));
+        }
+        else
+        dispatch(closeTicketFail(result.data.message))
+    }
+    catch(error) {
+        console.log(error);
+        dispatch(closeTicketFail(error.message));
     }
 }

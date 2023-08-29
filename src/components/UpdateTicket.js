@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import {Form, Button, Alert} from 'react-bootstrap';
 import {useSelector, useDispatch} from 'react-redux';
-import { replyOnTicket } from '../pages/Tickets-List/TicketAction';
+import { fetchSingleTicket, replyOnTicket } from '../pages/Tickets-List/TicketAction';
 
 export const UpdateTicket = ({tId}) => {
   const dispatch = useDispatch();
   const {user} = useSelector((state) => state.user);
-  const {replyMsg, error} = useSelector((state)=> state.tickets);
   const [reply, setReply] = useState('');
   const handleOnReplyChange = (e) => {
     setReply(e.target.value);
@@ -19,12 +18,13 @@ export const UpdateTicket = ({tId}) => {
       message: reply
     }
     dispatch(replyOnTicket(tId, msgObj));
+    //show reply to page by:-
+    dispatch(fetchSingleTicket(tId));
+    setReply("");
   }
 
   return (
     <div>
-      {replyMsg && <Alert variant='success'>{replyMsg}</Alert>}
-      {error && <Alert variant='danger'>{error}</Alert>}
       <Form onSubmit={handleOnReplySubmit}>
         <Form.Label className='text-secondary'>Reply or Update Ticket:</Form.Label>
         <Form.Control

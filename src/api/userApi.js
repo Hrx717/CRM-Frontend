@@ -18,7 +18,7 @@ export const userLogin = (formData) => {
             }
         }
         catch(error) {
-            reject(error.message);
+            reject(error);
         }
     })
 }
