@@ -51,14 +51,6 @@ const Login = ({formSwitcher}) => {
     }
   }
 
-  const handleOnResetSubmit = (e) => {
-    e.preventDefault();
-    if(!email) {
-      return alert('enter email');
-    }
-    console.log(email)
-  }
-
   return (
     <Container>
       <Row>
@@ -68,7 +60,7 @@ const Login = ({formSwitcher}) => {
           {error && <Alert variant='danger'>{error}</Alert>}
           <Form autoComplete='off' onSubmit={handleOnSubmit}>
             <Form.Group>
-              <Form.Label>Email</Form.Label>
+              <Form.Label className='fw-semibold'>Email</Form.Label>
               <Form.Control
               type='email'
               name='email'
@@ -79,8 +71,8 @@ const Login = ({formSwitcher}) => {
               />
             </Form.Group>
 
-            <Form.Group>
-              <Form.Label>Password</Form.Label>
+            <Form.Group className='mt-1'>
+              <Form.Label className='fw-semibold'>Password</Form.Label>
               <Form.Control
               type='password'
               name='password'
@@ -100,7 +92,14 @@ const Login = ({formSwitcher}) => {
 
       <Row>
         <Col>
-        <a href='#!' className='text-info' onClick={() => formSwitcher("reset")}>forget password?</a>
+        <a href='#!' className='text-info' onClick={() => formSwitcher("reset")}>Forget password?</a>
+        </Col>
+      </Row>
+
+      <Row className='py-4'>
+        <Col>
+        Are you new here? {'  '}
+        <a href='/registration' className='text-info'>Register Now</a>
         </Col>
       </Row>
     </Container>

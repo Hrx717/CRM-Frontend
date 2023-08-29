@@ -6,6 +6,7 @@ import { UpdateTicket } from '../../components/UpdateTicket'
 import {useParams} from 'react-router-dom'
 import {closeTicket, fetchSingleTicket} from '../Tickets-List/TicketAction'
 import {useDispatch, useSelector} from 'react-redux'
+import {resetResponseMsg} from '../Tickets-List/TicketListSlice';
 
 export const SingleTicketView = () => {
     const dispatch = useDispatch();
@@ -14,7 +15,11 @@ export const SingleTicketView = () => {
 
     useEffect(() => {
         dispatch(fetchSingleTicket(tId));
-    }, [dispatch]);
+
+        return () => {
+            (replyMsg || replyTicketError || error) && dispatch(resetResponseMsg())
+        }
+    }, [dispatch, tId, replyMsg, replyTicketError, error]);
 
     return (
         <Container>

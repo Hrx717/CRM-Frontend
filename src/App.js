@@ -10,6 +10,7 @@ import { AddTicket } from './pages/Add-ViewTicket/AddTicket'
 import { TicketList } from './pages/Tickets-List/TicketList'
 import { SingleTicketView } from './pages/Add-ViewTicket/SingleTicketView'
 import {PrivateRoute} from './components/PrivateRoute'
+import { Registration } from './pages/Registration/Registration';
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
       <Router>
         <Routes>
             <Route exact path='/' element={<Entry/>} />
+            <Route exact path='/registration' element={<Registration/>} />
             <Route exact path='/dashboard' element={<PrivateRoute children={<DashBoard/>}/>} />
             <Route exact path='/add-ticket' element={<PrivateRoute children={<AddTicket/>}/>} />
             <Route exact path='/tickets' element={<PrivateRoute children={<TicketList/>}/>}/>

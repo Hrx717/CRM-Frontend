@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Container,Form, Button, Spinner, Alert} from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
-import {openNewTicket} from './AddTicketAction'
+import {openNewTicket} from './AddTicketAction';
+import {resetSuccessMsg} from './AddTicketSlicer'
 
 const intialForm = {
   subject: '',
@@ -14,11 +15,11 @@ export const AddTicketForm = () => {
   const {successMsg, isLoading, error} = useSelector((state) => state.openTicket);
   const [formData, setFormData] = useState(intialForm);
 
-  // useEffect(() => {
-  //   return () => {
-  //     successMsg && dispatch(restSuccessMSg());
-  //   };
-  // }, [dispatch, frmData, frmDataErro]);
+  useEffect(() => {
+    return () => {
+      (successMsg || error) && dispatch(resetSuccessMsg());
+    };
+  }, [dispatch, successMsg, error]);
 
   const handleOnChange = (e) => {
     const {name, value} = e.target;

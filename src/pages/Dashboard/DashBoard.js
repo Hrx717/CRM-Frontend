@@ -10,12 +10,13 @@ export const DashBoard = () => {
   const dispatch = useDispatch();
   const {tickets} = useSelector((state) => state.tickets);
   useEffect(() => {
-    if(!tickets.lenght) {
+    // fetching all tickets - p
+    if(!tickets.length) {
       dispatch(fetchAllTickets());
     }
   }, [dispatch, tickets]);
 
-  const totalTickets = tickets.lenght;
+  const totalTickets = tickets.length;
   const pendingTickets = tickets.filter((row) => row.status !== 'Closed');
 
   return (
@@ -37,7 +38,7 @@ export const DashBoard = () => {
         <Row>
             <Col className='text-center mt-1 mb-2'>
             <div>Total Tickets: {totalTickets}</div>
-            <div>Pending Tickets: {pendingTickets.lenght}</div>
+            <div>Pending Tickets: {pendingTickets.length}</div>
             </Col>
         </Row>
 
