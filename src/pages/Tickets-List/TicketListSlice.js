@@ -4,6 +4,7 @@ let initialState = {
     tickets:[],
     isLoading:false,
     error:'',
+    replyTicketError: '',
     searchTicketList:[],
     selectedTicket: {},
     replyMsg: '',
@@ -55,11 +56,11 @@ const TicketListSlice = createSlice({
         },
         replyTicketSuccess: (state, {payload}) => {
             state.isLoading = false;
-            state.error = '';
+            state.replyTicketError = '';
             state.replyMsg = payload;
         },
         replyTicketFail: (state,action) => {
-            state.error = action.payload;
+            state.replyTicketError = action.payload;
             state.isLoading = false;
         },
         //close Ticket

@@ -1,10 +1,23 @@
-import React from 'react'
-import {Container, Row, Col, Button} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
-import { TicketTable } from '../../components/TicketTable'
-import { NestedLinks } from '../../components/NestedLinks'
+import React, {useEffect} from 'react';
+import {Container, Row, Col, Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import { TicketTable } from '../../components/TicketTable';
+import { NestedLinks } from '../../components/NestedLinks';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchAllTickets} from '../Tickets-List/TicketAction';
 
 export const DashBoard = () => {
+  const dispatch = useDispatch();
+  const {tickets} = useSelector((state) => state.tickets);
+  useEffect(() => {
+    if(!tickets.lenght) {
+      dispatch(fetchAllTickets());
+    }
+  }, [dispatch, tickets]);
+
+  const totalTickets = tickets.lenght;
+  const pendingTickets = tickets.filter((row) => row.status !== 'Closed');
+
   return (
     <Container>
        <Row>
@@ -23,8 +36,8 @@ export const DashBoard = () => {
 
         <Row>
             <Col className='text-center mt-1 mb-2'>
-            <div>Total Tickets: 50</div>
-            <div>Pending Tickets: 5</div>
+            <div>Total Tickets: {totalTickets}</div>
+            <div>Pending Tickets: {pendingTickets.lenght}</div>
             </Col>
         </Row>
 

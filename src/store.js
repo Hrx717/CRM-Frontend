@@ -1,14 +1,15 @@
 import {configureStore} from '@reduxjs/toolkit';
 import ticketsReducer from './pages/Tickets-List/TicketListSlice';
 import loginReducer from './components/LoginAndForget/LoginSlice';
-import userSlice from './pages/Dashboard/userSlice';
-
+import userReducer from './pages/Dashboard/userSlice';
+import newTicketReducer from './components/AddNewTicketForm/AddTicketSlicer';
 
 const store = configureStore({
     reducer: {
         tickets: ticketsReducer,
         login: loginReducer,
-        user: userSlice,
+        user: userReducer,
+        openTicket: newTicketReducer,
     }
 });
 

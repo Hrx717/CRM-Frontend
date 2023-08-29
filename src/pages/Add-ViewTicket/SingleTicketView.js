@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from 'react-redux'
 
 export const SingleTicketView = () => {
     const dispatch = useDispatch();
-    const {isLoading,error,selectedTicket, replyMsg} = useSelector((state) => state.tickets);
+    const {isLoading,error,selectedTicket, replyMsg, replyTicketError} = useSelector((state) => state.tickets);
     const {tId} = useParams();
 
     useEffect(() => {
@@ -20,18 +20,14 @@ export const SingleTicketView = () => {
         <Container>
             <Row>
                 <Col>
-                {replyMsg && <Alert variant='success'>{replyMsg}</Alert>}
-                {error && <Alert variant='danger'>{error}</Alert>}
-                </Col>
-            </Row>
-            <Row>
-                <Col>
                 <NestedLinks page="Ticket"/>
                 </Col>
             </Row>
             <Row>
                 <Col>
                 {isLoading && <Spinner variant='primary' animation='border'/>}
+                {replyMsg && <Alert variant='success'>{replyMsg}</Alert>}
+                {replyTicketError && <Alert variant='danger'>{replyTicketError}</Alert>}
                 {error && <Alert variant='danger'>{error}</Alert>}
                 </Col>
             </Row>
