@@ -1,10 +1,24 @@
 import axios from 'axios'
 
 const rootUrl = 'http://localhost:3001/v1/'
+const signupUrl = rootUrl +'user';
 const loginUrl = rootUrl + 'user/login';
 const userProfileUrl = rootUrl + 'user';
 const logoutUrl = rootUrl + 'user/logout';
 const newAccessJWT = rootUrl + 'tokens';
+
+export const userSignUp = (formData) => {
+    return new Promise(async (resolve,reject) => {
+        try{
+            const result = await axios.post(signupUrl, formData);
+
+            resolve(result.data);
+        }
+        catch(error) {
+            reject(error);
+        }
+    })
+}
 
 export const userLogin = (formData) => {
     return new Promise(async (resolve,reject) => {

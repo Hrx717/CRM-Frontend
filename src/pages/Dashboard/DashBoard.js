@@ -11,10 +11,8 @@ export const DashBoard = () => {
   const {tickets} = useSelector((state) => state.tickets);
   useEffect(() => {
     // fetching all tickets - p
-    if(!tickets.length) {
-      dispatch(fetchAllTickets());
-    }
-  }, [dispatch, tickets]);
+    dispatch(fetchAllTickets());
+  }, [dispatch]);
 
   const totalTickets = tickets.length;
   const pendingTickets = tickets.filter((row) => row.status !== 'Closed');

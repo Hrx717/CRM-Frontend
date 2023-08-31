@@ -1,6 +1,6 @@
 import React from 'react';
 // import {Container} from 'react-bootstrap';
-import SignUp from '../../components/SignUp/SignUp'
+import SignUp from '../../components/SignUp/SignUpForm'
 import './registration.style.css';
 
 export const Registration = () => {

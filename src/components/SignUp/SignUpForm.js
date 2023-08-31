@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import {Container,Button, Row, Col, Form} from 'react-bootstrap';
+import {Container,Button, Row, Col, Form, Spinner, Alert} from 'react-bootstrap';
+import {useDispatch, useSelector} from 'react-redux';
+import {userRegistration} from './SignUpAction';
 
 const initialState = {
     name: '',
@@ -18,11 +20,14 @@ const passwordError = {
     allCheck: false,
 }
 const SignUp = () => {
+    const dispatch = useDispatch();
+    const {isLoading, status, message} = useSelector((state) => state.registration);
     const [newUser, setNewUser] = useState(initialState);
     const [passwordVerification, setPasswordVerification] = useState(passwordError)
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
+        dispatch(userRegistration(newUser));
     }
 
     const handleOnChange = (e) => {
@@ -48,7 +53,7 @@ const SignUp = () => {
             });
         }
 
-        if(name==='confirmPass' && value.length > 5) {
+        if(name==='confirmPass') {
             const isMatched = newUser.password === value;
             const allCheck = isMatched && passwordVerification.phnlenght && passwordVerification.minLength;
             setPasswordVerification({
@@ -63,6 +68,11 @@ const SignUp = () => {
             <Row>
                 <Col><h1 className='text-center pt-2'>User Registration</h1></Col>
             <hr/>
+            </Row>
+            <Row>
+                <Col>
+                {message && <Alert variant={status==='success' ? 'success' : 'danger'}>{message}</Alert>}
+                </Col>
             </Row>
             <Row className='mt-1 ps-4 pe-3 pb-2'>
                 <Col>
@@ -134,10 +144,11 @@ const SignUp = () => {
                     required
                     />
                 </Form.Group>
-                {!passwordVerification.isMatched && <ul><li className='text-danger'>Passwords not matching...</li></ul>}
+                {!passwordVerification.isMatched && <ul><li className='text-danger'>Both the Passwords should match</li></ul>}
 
                 <Button type='submit' className='mt-3' 
-                disabled={Object.values(passwordVerification).includes(false)}>SignUp</Button>
+                disabled={Object.values(passwordVerification).includes(false)}>Submit</Button>
+                {isLoading && <Spinner animation='border'/>}
                 </Form>
                 </Col>
             </Row>

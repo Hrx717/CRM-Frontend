@@ -6,7 +6,7 @@ import {resetSuccessMsg} from './AddTicketSlicer'
 
 const intialForm = {
   subject: '',
-  issueDate: '',
+  issueDate: `${new Date().toLocaleDateString('en-CA')}`,
   message: ''
 };
 export const AddTicketForm = () => {
@@ -33,6 +33,7 @@ export const AddTicketForm = () => {
     e.preventDefault();
     const sender = user.name;
     dispatch(openNewTicket({...formData, sender}));
+    setFormData(intialForm);
   }
   return (
     <Container style={styles.FormBox}>
