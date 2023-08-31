@@ -7,7 +7,7 @@ import { loginPending, loginSuccess, loginFail } from './LoginSlice';
 import {userLogin} from '../../api/userApi';
 import {getUserProfile} from '../../pages/Dashboard/userAction'
 
-const Login = ({formSwitcher}) => {
+const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {isLoading,isAuth, error} = useSelector((state) => state.login);
@@ -92,7 +92,7 @@ const Login = ({formSwitcher}) => {
 
       <Row>
         <Col>
-        <a href='#!' className='text-info' onClick={() => formSwitcher("reset")}>Forget password?</a>
+        <a href='/password-reset' className='text-info'>Forget password?</a>
         </Col>
       </Row>
 

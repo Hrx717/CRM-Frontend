@@ -11,6 +11,7 @@ import { TicketList } from './pages/Tickets-List/TicketList'
 import { SingleTicketView } from './pages/Add-ViewTicket/SingleTicketView'
 import {PrivateRoute} from './components/PrivateRoute'
 import { Registration } from './pages/Registration/Registration';
+import PasswordOTPForm from './pages/Password-Reset/PasswordOTPForm';
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
       <Router>
         <Routes>
             <Route exact path='/' element={<Entry/>} />
+            <Route exact path='/password-reset' element={<PasswordOTPForm/>} />
             <Route exact path='/registration' element={<Registration/>} />
             <Route exact path='/dashboard' element={<PrivateRoute children={<DashBoard/>}/>} />
             <Route exact path='/add-ticket' element={<PrivateRoute children={<AddTicket/>}/>} />

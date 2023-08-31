@@ -27,7 +27,11 @@ const SignUp = () => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        dispatch(userRegistration(newUser));
+        const {name, email, phone, company, address, password} = newUser;
+        const formData = {
+            name, email, phone, company, address, password
+        }
+        dispatch(userRegistration(formData));
     }
 
     const handleOnChange = (e) => {
