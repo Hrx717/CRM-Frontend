@@ -8,6 +8,8 @@ let initialState = {
     searchTicketList:[],
     selectedTicket: {},
     replyMsg: '',
+    delStatus: '',
+    delMsg: '',
 }
 
 const TicketListSlice = createSlice({
@@ -82,7 +84,16 @@ const TicketListSlice = createSlice({
             state.error = '';
             state.replyTicketError = '';
             state.replyMsg = '';
-        }
+            state.delStatus = false;
+            state.delMsg = '';
+        },
+        //deleteTicket
+        deleteTicketSuccessFail: (state, {payload}) => {
+            state.isLoading = false;
+            state.delStatus = payload.status;
+            state.delMsg = payload.message;
+            state.error = '';
+        },
     }
 });
 
@@ -101,7 +112,8 @@ export const {
     closeTicketLoading,
     closeTicketSuccess,
     closeTicketFail,
-    resetResponseMsg
+    resetResponseMsg,
+    deleteTicketSuccessFail,
 } = actions;
 
 export default reducer;

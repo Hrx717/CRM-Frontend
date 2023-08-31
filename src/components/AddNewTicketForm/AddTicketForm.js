@@ -7,7 +7,8 @@ import {resetSuccessMsg} from './AddTicketSlicer'
 const intialForm = {
   subject: '',
   issueDate: `${new Date().toLocaleDateString('en-CA')}`,
-  message: ''
+  message: '',
+  type: 'IT'
 };
 export const AddTicketForm = () => {
   const dispatch = useDispatch();
@@ -66,6 +67,17 @@ export const AddTicketForm = () => {
               onChange={handleOnChange}
               required
               />
+            </Form.Group>
+
+            <Form.Group className='mt-1'>
+              <Form.Label>Issue Type</Form.Label>
+              <select className="form-select" aria-label="Default select example" 
+              name='type' value={formData.type} onChange={handleOnChange}>
+                <option value="IT">IT</option>
+                <option value="Accounts">Accounts</option>
+                <option value="Sales">Sales</option>
+                <option value="Other">Other</option>
+              </select>
             </Form.Group>
 
             <Form.Group>

@@ -1,21 +1,18 @@
 import {fetchTicketLoading, fetchTicketSuccess, fetchTicketFail,
     searchTickets,fetchSingleTicketLoading, 
-    fetchSingleTicketSuccess, 
-    fetchSingleTicketFail,replyTicketLoading,
-    replyTicketSuccess,
-    replyTicketFail,
-    closeTicketLoading,
-    closeTicketSuccess,
-    closeTicketFail,} from './TicketListSlice';
+    fetchSingleTicketSuccess, fetchSingleTicketFail,
+    replyTicketLoading, replyTicketSuccess, replyTicketFail, 
+    closeTicketLoading, closeTicketSuccess, closeTicketFail, 
+    deleteTicketSuccessFail} from './TicketListSlice';
 import { getAllTickets, getSingleTicket, updateReplyTicket,
-    updateTicketStatusClosed } from '../../api/ticketApi';
+    updateTicketStatusClosed, deleteTicketApi } from '../../api/ticketApi';
 
-export const fetchAllTickets = () => async (dispatch) => {
+export const fetchAllTickets = (user_type) => async (dispatch) => {
     //1. Start Loading
     dispatch(fetchTicketLoading());
     //2. Fetch data
     try {
-        const result = await getAllTickets();
+        const result = await getAllTickets(user_type);
         // console.log(result);
         if(result.data.status==='success')
         dispatch(fetchTicketSuccess(result.data.result));
@@ -80,5 +77,21 @@ export const closeTicket = (tId) => async (dispatch) =>{
     catch(error) {
         console.log(error);
         dispatch(closeTicketFail(error.message));
+    }
+}
+
+export const deleteTicket = (tId) => async (dispatch) =>{
+    dispatch(closeTicketLoading());
+    try {
+        const result = await deleteTicketApi(tId);
+        const status = result.data.status;
+        const message = result.data.message;
+        dispatch(deleteTicketSuccessFail({status, message}));
+    }
+    catch(error) {
+        console.log(error);
+        const message = error.message;
+        const status = 'error';
+        dispatch(deleteTicketSuccessFail({status, message}));
     }
 }

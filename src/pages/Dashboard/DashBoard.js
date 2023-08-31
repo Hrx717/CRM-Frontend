@@ -8,11 +8,12 @@ import {fetchAllTickets} from '../Tickets-List/TicketAction';
 
 export const DashBoard = () => {
   const dispatch = useDispatch();
+  const {user_type} = useSelector((state) => state.user.user);
   const {tickets} = useSelector((state) => state.tickets);
   useEffect(() => {
     // fetching all tickets - p
-    dispatch(fetchAllTickets());
-  }, [dispatch]);
+    dispatch(fetchAllTickets(user_type));
+  }, [dispatch, user_type]);
 
   const totalTickets = tickets.length;
   const pendingTickets = tickets.filter((row) => row.status !== 'Closed');
@@ -38,6 +39,12 @@ export const DashBoard = () => {
             <div>Total Tickets: {totalTickets}</div>
             <div>Pending Tickets: {pendingTickets.length}</div>
             </Col>
+        </Row>
+
+        <Row>
+          <Col>
+          {user_type!=='client' && <h4>Showing {user_type} related tickets:-</h4>}
+          </Col>
         </Row>
 
         <Row>

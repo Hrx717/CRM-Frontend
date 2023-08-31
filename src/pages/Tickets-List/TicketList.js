@@ -4,14 +4,15 @@ import {Container,Row,Col, Button} from 'react-bootstrap'
 import { SearchForm } from '../../components/SearchForm'
 import { TicketTable } from '../../components/TicketTable'
 import {Link} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {fetchAllTickets} from './TicketAction'
 
 export const TicketList = () => {
     const dispatch = useDispatch();
+    const {user_type} = useSelector((state) => state.user.user);
     useEffect(() => {
-        dispatch(fetchAllTickets());
-    }, [dispatch]);
+        dispatch(fetchAllTickets(user_type));
+    }, [dispatch, user_type]);
 
     return (
     <Container>
