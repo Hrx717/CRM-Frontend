@@ -21,13 +21,13 @@ issue and at the same time admin can view and resolve the open tickets.
 
 ### How to use
 
-**Setup Frontend**
+**Setup Frontend** <br>
 *Step 1* - Fork this repo.<br>
 *Step 2* - Clone and setup this project on your local system.<br>
 *Step 3* - Open project in any code editor or terminal.<br>
 *Step 4* - Use command npm start (Make sure NodeJs is installed on your system).<br>
 
-**Setup Backend**
+**Setup Backend** <br>
 *Step 1* - Go to https://github.com/Hrx717/CRM-Client-API <br>
 *Step 2* - Fork the repo.<br>
 *Step 3* - Clone and setup cleint api (backend) project on your local system.<br>
